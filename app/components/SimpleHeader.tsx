@@ -1,20 +1,25 @@
 "use client";
-import { Check, ChevronDown, Globe2, Menu, UserRound, X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
 
-const labels = {
-  en: { language: "English", nav: ["Home", "Forums", "Resources", "Members", "Wiki"], login: "Log in" },
-  it: { language: "Italiano", nav: ["Home", "Forum", "Risorse", "Membri", "Wiki"], login: "Accedi" },
-} as const;
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
+
+const nav = [
+  ["home", "Home", "/"],
+  ["forums", "Forums", "/forums"],
+  ["resources", "Resources", "/resources"],
+  ["members", "Members", "/members"],
+  ["wiki", "Wiki", "/wiki"],
+] as const;
 
 export function SimpleHeader({active}:{active:"forums"|"resources"|"members"|"wiki"}) {
-  const [open,setOpen]=useState(false), [languageOpen,setLanguageOpen]=useState(false), [lang,setLang]=useState<"en"|"it">("en");
-  const languageRef=useRef<HTMLDivElement>(null), t=labels[lang];
-  useEffect(()=>{const close=(event:MouseEvent)=>{if(!languageRef.current?.contains(event.target as Node))setLanguageOpen(false)};document.addEventListener("mousedown",close);return()=>document.removeEventListener("mousedown",close)},[]);
-  return <header className="sub-header glass">
-    <button className="sub-menu-button" onClick={()=>setOpen(!open)} aria-label="Menu">{open?<X size={20}/>:<Menu size={20}/>}</button>
-    <a className="brand real-brand" href="/"><img src="/spigotmc-logo.png" alt=""/><span>SPIGOT<span>MC</span></span></a>
-    <nav className={open?"sub-nav open":"sub-nav"}><a href="/">{t.nav[0]}</a><a className={active==="forums"?"active":""} href="/forums">{t.nav[1]}</a><a className={active==="resources"?"active":""} href="/resources">{t.nav[2]}</a><a className={active==="members"?"active":""} href="/members">{t.nav[3]}</a><a className={active==="wiki"?"active":""} href="/wiki">{t.nav[4]}</a></nav>
-    <div className="header-actions sub-header-actions"><div className="language" ref={languageRef}><button className="language-trigger" onClick={()=>setLanguageOpen(!languageOpen)} aria-expanded={languageOpen}><Globe2 size={16}/><span>{lang.toUpperCase()}</span><ChevronDown size={14} className={languageOpen?"rotate":""}/></button>{languageOpen&&<div className="language-menu glass-popover" role="menu">{(["en","it"] as const).map(code=><button key={code} className={lang===code?"chosen":""} onClick={()=>{setLang(code);setLanguageOpen(false)}}><span className="lang-code">{code.toUpperCase()}</span><span>{labels[code].language}</span>{lang===code&&<Check size={15}/>}</button>)}</div>}</div><button className="guest-button" aria-label={t.login} title={t.login}><UserRound size={18}/><span className="guest-status"/></button></div>
-  </header>
+  const [open,setOpen]=useState(false);
+  return <>
+    <div className="mockup-notice"><b>UNOFFICIAL DESIGN MOCKUP</b><span>This is not an official SpigotMC website. It is an independent visual restyle created for discussion and feedback.</span></div>
+    <header className="sub-header community-header">
+      <a className="community-logo" href="/"><img src="/spigotmc-logo.png" alt=""/><span>SPIGOT<b>MC</b><small>High performance Minecraft</small></span></a>
+      <button className="sub-menu-button" onClick={()=>setOpen(!open)} aria-label="Toggle navigation">{open?<X size={20}/>:<Menu size={20}/>}</button>
+      <nav className={open?"sub-nav open":"sub-nav"}>{nav.map(([id,label,href])=><a key={id} className={active===id?"active":""} href={href}>{label}</a>)}</nav>
+      <div className="header-actions sub-header-actions"><button className="login-button">Log in</button><button className="register-button">Register</button></div>
+    </header>
+  </>
 }
