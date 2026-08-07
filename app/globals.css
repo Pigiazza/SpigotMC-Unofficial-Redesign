@@ -111,3 +111,28 @@ main { position: relative; isolation: isolate; }
 @keyframes nav-item-bounce { 0%{opacity:0;transform:translateX(18px) scale(.9)} 70%{transform:translateX(-4px) scale(1.02)} 100%{opacity:1;transform:translateX(0) scale(1)} }
 .menu-wrap .nav.open a { animation: nav-item-bounce .42s both cubic-bezier(.34,1.56,.64,1); }.menu-wrap .nav.open a:nth-child(2){animation-delay:.035s}.menu-wrap .nav.open a:nth-child(3){animation-delay:.07s}.menu-wrap .nav.open a:nth-child(4){animation-delay:.105s}
 @media (max-width:700px){.topbar{padding:0 16px}.topbar>.brand{font-size:17px}.brand-mark{transform:scale(.88) skewY(-8deg);margin-right:-3px}.language-trigger{padding:0 10px}.language-trigger span{display:none}.guest-button{width:38px;height:38px}.hamburger-button{width:43px;height:38px}.menu-wrap .nav{right:0;left:auto;top:49px}.resource-filters{margin-left:0;width:100%;justify-content:stretch}.resource-filters button{flex:1;padding-left:8px;padding-right:8px}}
+
+/* Half-screen menu + rounded typography */
+body, button, input { font-family: ui-rounded, "Arial Rounded MT Bold", "Trebuchet MS", Arial, sans-serif; font-weight: 650; }
+h1,h2,h3,.brand,.nav a,.primary-button,.section-kicker { font-family: ui-rounded, "Arial Rounded MT Bold", "Trebuchet MS", Arial, sans-serif; font-weight: 900; }
+.hero h1 { letter-spacing: -.065em; }.section-heading h2 { letter-spacing: -.045em; }
+.topbar { justify-content: space-between; }
+.topbar > .menu-wrap { margin-right: auto; z-index: 6; }
+.topbar > .header-actions { margin-left: auto; }
+.hamburger-button { position: relative; z-index: 44; }
+.hamburger-button.active { transform: scale(1.04); background: linear-gradient(145deg,rgba(255,255,255,.95),rgba(255,230,220,.72)); box-shadow: 0 12px 34px rgba(109,49,24,.18), inset 0 1px 0 #fff; }
+.hamburger-button.active span:nth-child(1) { transform: translateY(6.8px) rotate(45deg); }
+.hamburger-button.active span:nth-child(3) { transform: translateY(-6.8px) rotate(-45deg); }
+.menu-wrap .nav { position: absolute; inset: 0 auto auto -5.5vw; width: 50vw; min-width: 520px; height: calc(100dvh - 26px); padding: 98px clamp(45px,7vw,110px) 55px; display: flex; align-items: center; justify-content: center; gap: 10px; border-width: 0 1px 1px 0; border-radius: 0 0 42px 0; transform-origin: top left; transform: translateX(-105%) scale(.96); opacity: .2; background: linear-gradient(135deg,rgba(255,255,255,.86),rgba(245,235,226,.66)); box-shadow: 30px 35px 90px rgba(45,33,24,.2), inset -1px -1px 0 rgba(255,255,255,.5), inset 0 1px 0 #fff; backdrop-filter: blur(34px) saturate(185%); -webkit-backdrop-filter: blur(34px) saturate(185%); transition: transform .62s cubic-bezier(.22,1,.36,1), opacity .32s ease, visibility .32s ease; }
+.menu-wrap .nav.open { transform: translateX(0) scale(1); opacity: 1; }
+.menu-wrap .nav a { width: 100%; min-height: auto; padding: 8px 0; justify-content: center; gap: 18px; border-radius: 18px; color: #211f1c; font-size: clamp(36px,4.4vw,68px); line-height: .98; letter-spacing: -.055em; text-align: center; }
+.menu-wrap .nav a span { position: absolute; margin-left: min(-34vw,-250px); width: auto; height: auto; background: transparent; box-shadow: none; color: #aaa097; font-size: 10px; letter-spacing: .12em; }
+.menu-wrap .nav a:hover,.menu-wrap .nav a.active { color: var(--orange); background: transparent; transform: scale(1.045); box-shadow: none; }
+@keyframes half-menu-item { 0%{opacity:0;transform:translateY(34px) scale(.92)} 72%{transform:translateY(-5px) scale(1.025)} 100%{opacity:1;transform:translateY(0) scale(1)} }
+.menu-wrap .nav.open a { animation: half-menu-item .58s both cubic-bezier(.34,1.56,.64,1); }.menu-wrap .nav.open a:nth-child(2){animation-delay:.055s}.menu-wrap .nav.open a:nth-child(3){animation-delay:.11s}.menu-wrap .nav.open a:nth-child(4){animation-delay:.165s}
+.menu-backdrop { position: fixed; inset: 0; z-index: 15; padding: 0; border: 0; background: rgba(25,20,17,.13); backdrop-filter: blur(0); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .36s ease, visibility .36s ease, backdrop-filter .45s ease; }
+.menu-backdrop.show { opacity: 1; visibility: visible; pointer-events: auto; backdrop-filter: blur(5px); }
+@media (max-width:700px){.topbar>.menu-wrap{margin-right:auto}.menu-wrap .nav{left:-16px;right:auto;top:0;width:88vw;min-width:0;height:calc(100dvh - 26px);padding:95px 28px 45px;border-radius:0 0 34px 0}.menu-wrap .nav a{font-size:clamp(38px,12vw,58px)}.menu-wrap .nav a span{display:none}.topbar>.brand{font-size:15px}.topbar>.brand .brand-mark{display:none}}
+.real-brand img { width: 42px; height: 42px; object-fit: cover; border-radius: 12px; mix-blend-mode: multiply; }
+.footer .real-brand img { width: 36px; height: 36px; filter: invert(1); mix-blend-mode: screen; opacity: .92; }
+@media (max-width:700px){.topbar>.real-brand img{display:block;width:34px;height:34px;border-radius:10px}.topbar>.real-brand>span{display:none}}

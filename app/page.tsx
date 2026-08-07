@@ -49,7 +49,13 @@ export default function Home() {
       <div className="ambient ambient-one" /><div className="ambient ambient-two" />
       <div className="proposal">{t.proposal}</div>
       <header className="topbar glass">
-        <a className="brand" href="#top" aria-label="SpigotMC home"><span className="brand-mark"><i /><i /><i /></span><span>SPIGOT<span>MC</span></span></a>
+        <div className="menu-wrap">
+          <button className={menuOpen ? "hamburger-button active" : "hamburger-button"} onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu" aria-expanded={menuOpen}><span/><span/><span/></button>
+          <nav className={menuOpen ? "nav open" : "nav"} aria-label="Main navigation">
+            <a className="active" href="#forums" onClick={() => setMenuOpen(false)}><span>01</span>{t.nav[0]}</a><a href="#resources" onClick={() => setMenuOpen(false)}><span>02</span>{t.nav[1]}</a><a href="#community" onClick={() => setMenuOpen(false)}><span>03</span>{t.nav[2]}</a><a href="#wiki" onClick={() => setMenuOpen(false)}><span>04</span>{t.nav[3]}</a>
+          </nav>
+        </div>
+        <a className="brand real-brand" href="#top" aria-label="SpigotMC home"><img src="/spigotmc-logo.png" alt="" /><span>SPIGOT<span>MC</span></span></a>
         <div className="header-actions">
           <div className="language" ref={languageRef}>
             <button className="language-trigger" onClick={() => setLanguageOpen(!languageOpen)} aria-expanded={languageOpen}><Globe2 size={16}/><span>{t.flag}</span><ChevronDown size={14} className={languageOpen ? "rotate" : ""}/></button>
@@ -58,14 +64,9 @@ export default function Home() {
             </div>}
           </div>
           <button className="guest-button" aria-label={t.login} title={t.login}><UserRound size={18}/><span className="guest-status" /></button>
-          <div className="menu-wrap">
-            <button className={menuOpen ? "hamburger-button active" : "hamburger-button"} onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu" aria-expanded={menuOpen}><span/><span/><span/></button>
-            <nav className={menuOpen ? "nav open" : "nav"} aria-label="Main navigation">
-              <a className="active" href="#forums" onClick={() => setMenuOpen(false)}><span>01</span>{t.nav[0]}</a><a href="#resources" onClick={() => setMenuOpen(false)}><span>02</span>{t.nav[1]}</a><a href="#community" onClick={() => setMenuOpen(false)}><span>03</span>{t.nav[2]}</a><a href="#wiki" onClick={() => setMenuOpen(false)}><span>04</span>{t.nav[3]}</a>
-            </nav>
-          </div>
         </div>
       </header>
+      <button className={menuOpen ? "menu-backdrop show" : "menu-backdrop"} onClick={() => setMenuOpen(false)} aria-label="Close menu" tabIndex={menuOpen ? 0 : -1} />
 
       <section className="hero" id="top">
         <div className="hero-copy">
@@ -91,7 +92,7 @@ export default function Home() {
         <div className="community-layout"><div className="discussion-list glass-dark">{discussions.map((topic) => <article className="discussion" key={topic.en}><span className={`topic-tag ${topic.tag.toLowerCase()}`}>{topic.tag}</span><div className="topic-copy"><h3>{topic[lang]}</h3><p>{topic.meta}</p></div><span className="replies"><MessageCircle size={13}/>{topic.replies}</span><div className="topic-user"><span>{topic.avatar}</span><small>{topic.time}</small></div></article>)}<a className="all-discussions" href="#all-discussions">{t.all}<ArrowRight size={14}/></a></div>
           <aside className="join-card glass-orange" id="community"><Sparkles className="join-spark" size={29}/><h3>{t.idea}</h3><p>{t.ideaText}</p><button>{t.account}<ArrowRight size={16}/></button><small>{t.noCard}</small></aside></div>
       </section>
-      <footer className="footer"><a className="brand footer-brand" href="#top"><span className="brand-mark"><i /><i /><i /></span><span>SPIGOT<span>MC</span></span></a><p>{t.disclaimer}</p><div>{t.footer.map((item)=><a key={item} href="#about">{item}</a>)}</div></footer>
+      <footer className="footer"><a className="brand real-brand footer-brand" href="#top"><img src="/spigotmc-logo.png" alt="" /><span>SPIGOT<span>MC</span></span></a><p>{t.disclaimer}</p><div>{t.footer.map((item)=><a key={item} href="#about">{item}</a>)}</div></footer>
     </main>
   );
 }
