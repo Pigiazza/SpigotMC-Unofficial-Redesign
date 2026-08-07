@@ -52,7 +52,7 @@ export default function Home() {
         <div className="menu-wrap">
           <button className={menuOpen ? "hamburger-button active" : "hamburger-button"} onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu" aria-expanded={menuOpen}><span/><span/><span/></button>
           <nav className={menuOpen ? "nav open" : "nav"} aria-label="Main navigation">
-            <a href="/forums" onClick={() => setMenuOpen(false)}><span>01</span>{t.nav[0]}</a><a href="/resources" onClick={() => setMenuOpen(false)}><span>02</span>{t.nav[1]}</a><a href="https://www.spigotmc.org/members/" onClick={() => setMenuOpen(false)}><span>03</span>{t.nav[2]}</a><a href="https://www.spigotmc.org/wiki/" onClick={() => setMenuOpen(false)}><span>04</span>{t.nav[3]}</a>
+            <a href="/forums" onClick={() => setMenuOpen(false)}><span>01</span>{t.nav[0]}</a><a href="/resources" onClick={() => setMenuOpen(false)}><span>02</span>{t.nav[1]}</a><a href="/members" onClick={() => setMenuOpen(false)}><span>03</span>{t.nav[2]}</a><a href="/wiki" onClick={() => setMenuOpen(false)}><span>04</span>{t.nav[3]}</a>
           </nav>
         </div>
         <a className="brand real-brand" href="#top" aria-label="SpigotMC home"><img src="/spigotmc-logo.png" alt="" /><span>SPIGOT<span>MC</span></span></a>
