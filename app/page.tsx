@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowDownToLine, ArrowRight, ArrowUpRight, Check, ChevronDown, Compass, Gauge, Globe2, Menu, MessageCircle, Play, Search, ShieldCheck, Sparkles, X, Zap } from "lucide-react";
+import { ArrowDownToLine, ArrowRight, ArrowUpRight, Check, ChevronDown, Compass, Gauge, Globe2, MessageCircle, Play, ShieldCheck, Sparkles, UserRound, Zap } from "lucide-react";
 
 const copy = {
   en: {
@@ -35,10 +35,8 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
   const [lang, setLang] = useState<"en" | "it">("it");
-  const [search, setSearch] = useState("");
   const languageRef = useRef<HTMLDivElement>(null);
   const t = copy[lang];
-  const filtered = resources.filter((item) => item.title.toLowerCase().includes(search.toLowerCase()));
 
   useEffect(() => {
     const close = (event: MouseEvent) => { if (!languageRef.current?.contains(event.target as Node)) setLanguageOpen(false); };
@@ -52,19 +50,20 @@ export default function Home() {
       <div className="proposal">{t.proposal}</div>
       <header className="topbar glass">
         <a className="brand" href="#top" aria-label="SpigotMC home"><span className="brand-mark"><i /><i /><i /></span><span>SPIGOT<span>MC</span></span></a>
-        <nav className={menuOpen ? "nav open" : "nav"} aria-label="Main navigation">
-          <a className="active" href="#forums">{t.nav[0]}</a><a href="#resources">{t.nav[1]}</a><a href="#community">{t.nav[2]}</a><a href="#wiki">{t.nav[3]}</a>
-        </nav>
         <div className="header-actions">
-          <button className="round-icon" aria-label="Search"><Search size={17} /></button>
           <div className="language" ref={languageRef}>
             <button className="language-trigger" onClick={() => setLanguageOpen(!languageOpen)} aria-expanded={languageOpen}><Globe2 size={16}/><span>{t.flag}</span><ChevronDown size={14} className={languageOpen ? "rotate" : ""}/></button>
             {languageOpen && <div className="language-menu glass-popover" role="menu">
               {(["it", "en"] as const).map((code) => <button key={code} className={lang === code ? "chosen" : ""} onClick={() => {setLang(code);setLanguageOpen(false)}}><span className="lang-code">{copy[code].flag}</span><span>{copy[code].language}</span>{lang === code && <Check size={15}/>}</button>)}
             </div>}
           </div>
-          <button className="login">{t.login}</button><button className="signup">{t.join}</button>
-          <button className="menu round-icon" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">{menuOpen ? <X size={19}/> : <Menu size={19}/>}</button>
+          <button className="guest-button" aria-label={t.login} title={t.login}><UserRound size={18}/><span className="guest-status" /></button>
+          <div className="menu-wrap">
+            <button className={menuOpen ? "hamburger-button active" : "hamburger-button"} onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu" aria-expanded={menuOpen}><span/><span/><span/></button>
+            <nav className={menuOpen ? "nav open" : "nav"} aria-label="Main navigation">
+              <a className="active" href="#forums" onClick={() => setMenuOpen(false)}><span>01</span>{t.nav[0]}</a><a href="#resources" onClick={() => setMenuOpen(false)}><span>02</span>{t.nav[1]}</a><a href="#community" onClick={() => setMenuOpen(false)}><span>03</span>{t.nav[2]}</a><a href="#wiki" onClick={() => setMenuOpen(false)}><span>04</span>{t.nav[3]}</a>
+            </nav>
+          </div>
         </div>
       </header>
 
@@ -83,8 +82,8 @@ export default function Home() {
 
       <section className="resource-section" id="resources">
         <div className="section-heading"><div><span className="section-kicker">{t.discover}</span><h2>{t.tools}</h2></div><a href="#all">{t.browse}<ArrowUpRight size={15}/></a></div>
-        <div className="resource-toolbar glass-control"><label><Search size={17}/><input value={search} onChange={(e) => setSearch(e.target.value)} placeholder={t.placeholder} /></label><div>{t.filters.map((filter, i) => <button className={i === 0 ? "selected" : ""} key={filter}>{filter}</button>)}</div></div>
-        <div className="resource-grid">{filtered.map(({Icon,...item}) => <article className="resource-card glass-card" key={item.title}><div className={`resource-icon ${item.color}`}><Icon size={24}/></div><div className="card-title"><h3>{item.title}</h3><span>{t.free}</span></div><p>{item.text}</p><div className="compat"><Check size={13}/>{t.compatible} {item.version}</div><footer><span>{t.by} <b>{item.author}</b></span><span><ArrowDownToLine size={12}/>{item.downloads}</span></footer></article>)}{filtered.length === 0 && <p className="empty">{t.empty}</p>}</div>
+        <div className="resource-filters glass-control">{t.filters.map((filter, i) => <button className={i === 0 ? "selected" : ""} key={filter}>{filter}</button>)}</div>
+        <div className="resource-grid">{resources.map(({Icon,...item}) => <article className="resource-card glass-card" key={item.title}><div className={`resource-icon ${item.color}`}><Icon size={24}/></div><div className="card-title"><h3>{item.title}</h3><span>{t.free}</span></div><p>{item.text}</p><div className="compat"><Check size={13}/>{t.compatible} {item.version}</div><footer><span>{t.by} <b>{item.author}</b></span><span><ArrowDownToLine size={12}/>{item.downloads}</span></footer></article>)}</div>
       </section>
 
       <section className="community" id="forums">
