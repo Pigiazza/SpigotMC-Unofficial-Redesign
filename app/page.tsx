@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowDownToLine, ArrowRight, ArrowUpRight, Check, ChevronDown, Compass, Gauge, Globe2, MessageCircle, Play, ShieldCheck, Sparkles, UserRound, Zap } from "lucide-react";
+import { ArrowDownToLine, ArrowRight, ArrowUpRight, Check, ChevronDown, Compass, Gauge, Globe2, MessageCircle, Play, ShieldCheck, Sparkles, UserRound } from "lucide-react";
 
 const copy = {
   en: {
@@ -52,7 +52,7 @@ export default function Home() {
         <div className="menu-wrap">
           <button className={menuOpen ? "hamburger-button active" : "hamburger-button"} onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu" aria-expanded={menuOpen}><span/><span/><span/></button>
           <nav className={menuOpen ? "nav open" : "nav"} aria-label="Main navigation">
-            <a className="active" href="#forums" onClick={() => setMenuOpen(false)}><span>01</span>{t.nav[0]}</a><a href="#resources" onClick={() => setMenuOpen(false)}><span>02</span>{t.nav[1]}</a><a href="#community" onClick={() => setMenuOpen(false)}><span>03</span>{t.nav[2]}</a><a href="#wiki" onClick={() => setMenuOpen(false)}><span>04</span>{t.nav[3]}</a>
+            <a href="/forums" onClick={() => setMenuOpen(false)}><span>01</span>{t.nav[0]}</a><a href="/resources" onClick={() => setMenuOpen(false)}><span>02</span>{t.nav[1]}</a><a href="https://www.spigotmc.org/members/" onClick={() => setMenuOpen(false)}><span>03</span>{t.nav[2]}</a><a href="https://www.spigotmc.org/wiki/" onClick={() => setMenuOpen(false)}><span>04</span>{t.nav[3]}</a>
           </nav>
         </div>
         <a className="brand real-brand" href="#top" aria-label="SpigotMC home"><img src="/spigotmc-logo.png" alt="" /><span>SPIGOT<span>MC</span></span></a>
@@ -71,13 +71,12 @@ export default function Home() {
       <section className="hero" id="top">
         <div className="hero-copy">
           <div className="eyebrow"><span /> {t.eyebrow}</div><h1>{t.title1}<br /><em>{t.title2}</em></h1><p>{t.intro}</p>
-          <div className="hero-actions"><a className="primary-button liquid-button" href="#resources">{t.explore}<ArrowRight size={16}/></a><a className="text-button glass-button" href="#forums"><span className="play"><Play size={10} fill="currentColor"/></span>{t.forums}</a></div>
+          <div className="hero-actions"><a className="primary-button liquid-button" href="/resources">{t.explore}<ArrowRight size={16}/></a><a className="text-button glass-button" href="/forums"><span className="play"><Play size={10} fill="currentColor"/></span>{t.forums}</a></div>
           <div className="trust-row glass-strip"><div><strong>4.7M+</strong><span>{t.stats[0]}</span></div><div><strong>72K+</strong><span>{t.stats[1]}</span></div><div><strong>12 years</strong><span>{t.stats[2]}</span></div></div>
         </div>
         <div className="hero-art" aria-label="Abstract Minecraft server illustration">
-          <div className="grid-lines" /><div className="glass-orb orb-a"/><div className="glass-orb orb-b"/>
-          <div className="cube cube-one glass-panel"><Zap size={30}/></div><div className="cube cube-two"><span>MC</span></div><div className="cube cube-three glass-panel"><Sparkles size={26}/></div>
-          <div className="server-card glass-panel"><div className="server-top"><span>{t.status}</span><b><i /> {t.online}</b></div><h3>play.spigotmc.org</h3><div className="server-stats"><span><b>18,429</b>{t.players}</span><span><b>42 ms</b>{t.ping}</span></div><div className="signal"><i /><i /><i /><i /><i /></div></div><div className="orange-orbit" />
+          <div className="grid-lines" /><div className="ecosystem-orbit" />
+          <div className="ecosystem-panel glass-panel"><span className="ecosystem-label">OPEN SERVER ECOSYSTEM</span><h3>One community.<br/>Endless possibilities.</h3><div className="ecosystem-flow"><div><Gauge size={22}/><span><b>Spigot API</b><small>Build on a stable foundation</small></span></div><i/><div><ShieldCheck size={22}/><span><b>Resources</b><small>Extend every server</small></span></div><i/><div><Compass size={22}/><span><b>Community</b><small>Learn and share together</small></span></div></div></div>
         </div>
       </section>
 
