@@ -178,3 +178,13 @@ h1,h2,h3,.brand,.nav a,.primary-button,.section-kicker { font-family: ui-rounded
 .hamburger-button:focus-visible { box-shadow: 0 0 0 3px rgba(240,90,36,.24),0 9px 24px rgba(48,36,27,.11),inset 0 1px 0 #fff; }
 .menu-wrap .nav { top: -18px; height: calc(100dvh - 26px); background:linear-gradient(135deg,rgba(255,255,255,.985),rgba(246,236,228,.965)); }
 @media(max-width:700px){.menu-wrap .nav{top:-18px;height:calc(100dvh - 26px)}}
+
+/* Shared navigation polish */
+.join-card button{color:#292724}
+.join-card button svg{color:#292724}
+.footer .real-brand img{filter:none;mix-blend-mode:normal;opacity:1}
+.guest-button{display:grid!important;place-items:center;line-height:0;flex:0 0 40px}
+.guest-button>svg{display:block;margin:0;transform:none}
+.sub-header-actions{justify-self:end;margin-left:0}
+.sub-header-actions .language-menu{top:48px}
+@media(max-width:560px){.sub-header-actions{gap:6px}.sub-header-actions .language-trigger{padding:0 9px}}

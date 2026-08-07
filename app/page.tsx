@@ -34,7 +34,7 @@ const discussions = [
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
-  const [lang, setLang] = useState<"en" | "it">("it");
+  const [lang, setLang] = useState<"en" | "it">("en");
   const languageRef = useRef<HTMLDivElement>(null);
   const t = copy[lang];
 
